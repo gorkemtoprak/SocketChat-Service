@@ -1,13 +1,26 @@
 {
   "name": "socket_chat_server",
   "version": "1.0.0",
-  "description": "",
+  "description": "SocketChat Server",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "start:dev": "nodemon index.js"
   },
   "author": "Gorkem Toprak",
   "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1",
+    "moment": "^2.29.3",
+    "bcryptjs": "^2.4.3",
+    "express-validator": "^6.14.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.2.8",
+    "socket.io": "^4.5.1",
+    "dotenv": "^8.6.0",
+    "cors": "^2.8.5"
+  },
   "devDependencies": {
     "nodemon": "^2.0.18"
   }
