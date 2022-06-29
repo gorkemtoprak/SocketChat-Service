@@ -1,13 +1,30 @@
-const express = require('express');
+const express = require("express");
+const path = require("path");
 const http = require('http');
-const path = require('path');
+require("dotenv").config();
 
-const app = express();
-const server = http.createServer(app);
+//MongoDB Connection
+require("./config/database").connectDB();
 
 const PORT = 3000 || process.env.PORT;
 
-server.listen(PORT, () => console.log('Server Running on Port', PORT));
+const app = express();
+app.use(express.json());
+
+const server = http.createServer(app);
+module.exports.io = require("socket.io")(server);
+require("./sockets/socket");
+
+const publicPath = path.resolve(__dirname, "public");
+app.use(express.static(publicPath));
+
+app.use("/api/users", require("./routers/users"));
+app.use("/api/sessions", require("./routers/authentication"));
+
+server.listen(PORT, (err) => {
+    if (err) throw new Error(err);
+    console.log("Server Running on Port:", PORT);
+});
 
 const io = require('socket.io')(server);
 io.on('connection', (socket) => {
