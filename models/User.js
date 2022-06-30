@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 
+//Define User model restrictions
 const userSchema = Schema({
     name: {
         type: String,

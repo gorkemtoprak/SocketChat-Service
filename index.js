@@ -1,3 +1,4 @@
+// I will be using express.js for creating our service
 const express = require("express");
 const path = require("path");
 const http = require('http');
@@ -6,9 +7,11 @@ require("dotenv").config();
 //MongoDB Connection
 require("./config/database").connectDB();
 
+//Set available port to connect our server
 const PORT = 3000 || process.env.PORT;
 
 const app = express();
+//define data type
 app.use(express.json());
 
 const server = http.createServer(app);
@@ -20,6 +23,7 @@ app.use(express.static(publicPath));
 
 app.use("/api/users", require("./routers/users"));
 app.use("/api/sessions", require("./routers/authentication"));
+app.use("/api/messages", require("./routers/messages"));
 
 server.listen(PORT, (err) => {
     if (err) throw new Error(err);
